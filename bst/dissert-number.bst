@@ -1,10 +1,10 @@
 %%
-%% This is file `thesisnumbered.bst',
+%% This is file `dissert-number.bst',
 %% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
-%% merlin.mbs  (with options: `ay,nat,seq-no,nm-rvcx,jnrlst,keyxyr,dt-beg,yr-par,yrp-x,note-yr,atit-u,vnum-x,volp-com,num-xser,jnm-x,ppx,ed,xedn,amper,and-xcom,nfss,')
+%% merlin.mbs  (with options: `ay,nat,seq-no,nm-rvcx,jnrlst,nmlm,x2,m1,nmft,nmft-bf,nmfted,keyxyr,dt-beg,yr-par,note-yr,jxper,vnum-x,volp-semi,num-xser,ser-vol,jnm-x,bkpg-par,in-x,ppx,ed,xedn,amper,and-xcom,etal-xc,nfss,')
 %% ----------------------------------------
 %% ***  ***
 %% 
@@ -23,7 +23,8 @@
  % \ProvidesFile{merlin.mbs}[2007/04/24 4.20 (PWD, AO, DPC)]
  %   For use with BibTeX version 0.99a or later
  %-------------------------------------------------------------------
- % This bibliography style file is intended for texts in ENGLISH
+ % This bibliography style file requires a file named  babelbst.tex
+ %   containing the definitions of word commands like \bbleditor, etc.
  % This is an author-year citation style bibliography. As such, it is
  % non-standard LaTeX, and requires a special package file to function properly.
  % Such a package is    natbib.sty   by Patrick W. Daly
@@ -147,7 +148,7 @@ FUNCTION {add.blank}
 
 FUNCTION {date.block}
 {
-  add.blank
+  new.block
 }
 
 FUNCTION {not}
@@ -198,6 +199,16 @@ FUNCTION {emphasize}
     { "\emph{" swap$ * "}" * }
   if$
 }
+FUNCTION {bolden}
+{ duplicate$ empty$
+    { pop$ "" }
+    { "\textbf{" swap$ * "}" * }
+  if$
+}
+FUNCTION {bib.name.font}
+{ bolden }
+FUNCTION {bib.fname.font}
+{ bib.name.font }
 FUNCTION {tie.or.space.prefix}
 { duplicate$ text.length$ #3 <
     { "~" }
@@ -207,45 +218,45 @@ FUNCTION {tie.or.space.prefix}
 }
 
 FUNCTION {capitalize}
-{ "u" change.case$ "t" change.case$ }
+{ "\capitalize" swap$ * }
 
 FUNCTION {space.word}
 { " " swap$ * " " * }
  % Here are the language-specific definitions for explicit words.
  % Each function has a name bbl.xxx where xxx is the English word.
- % The language selected here is ENGLISH
+ % The BABEL language selection is made here; definitions in babelbst.tex.
 FUNCTION {bbl.and}
-{ "and"}
+{ "\&"}
 
 FUNCTION {bbl.etal}
-{ "et~al." }
+{ "et coll."}
 
 FUNCTION {bbl.editors}
-{ "eds." }
+{ "\'editeurs" }
 
 FUNCTION {bbl.editor}
-{ "ed." }
+{ "\'editeur" }
 
 FUNCTION {bbl.edby}
-{ "edited by" }
+{ "\'edit\'e par" }
 
 FUNCTION {bbl.edition}
-{ "edition" }
+{ "\'edition" }
 
 FUNCTION {bbl.volume}
 { "volume" }
 
 FUNCTION {bbl.of}
-{ "of" }
+{ "de" }
 
 FUNCTION {bbl.number}
-{ "number" }
+{ "num\'ero" }
 
 FUNCTION {bbl.nr}
-{ "no." }
+{ "nb." }
 
 FUNCTION {bbl.in}
-{ "in" }
+{ "dans" }
 
 FUNCTION {bbl.pages}
 { "" }
@@ -254,40 +265,40 @@ FUNCTION {bbl.page}
 { "" }
 
 FUNCTION {bbl.chapter}
-{ "chapter" }
+{ "chapitre" }
 
 FUNCTION {bbl.techrep}
-{ "Technical Report" }
+{ "rapport" }
 
 FUNCTION {bbl.mthesis}
-{ "Master's thesis" }
+{ "th\`ese de Master" }
 
 FUNCTION {bbl.phdthesis}
-{ "Ph.D. thesis" }
+{ "th\`ese de doctorat" }
 
-MACRO {jan} {"January"}
+MACRO {jan} {"Janvier"}
 
-MACRO {feb} {"February"}
+MACRO {feb} {"Février"}
 
-MACRO {mar} {"March"}
+MACRO {mar} {"Mars"}
 
-MACRO {apr} {"April"}
+MACRO {apr} {"Avril"}
 
-MACRO {may} {"May"}
+MACRO {may} {"Mai"}
 
-MACRO {jun} {"June"}
+MACRO {jun} {"Juin"}
 
-MACRO {jul} {"July"}
+MACRO {jul} {"Juillet"}
 
-MACRO {aug} {"August"}
+MACRO {aug} {"Août"}
 
-MACRO {sep} {"September"}
+MACRO {sep} {"Septembre"}
 
-MACRO {oct} {"October"}
+MACRO {oct} {"Octobre"}
 
-MACRO {nov} {"November"}
+MACRO {nov} {"Novembre"}
 
-MACRO {dec} {"December"}
+MACRO {dec} {"Décembre"}
 
 MACRO {acmcs} {"ACM Computing Surveys"}
 
@@ -386,6 +397,14 @@ FUNCTION {format.names}
       't :=
       nameptr #1 >
         {
+          nameptr #1
+          #1 + =
+          numnames #2
+          > and
+            { "others" 't :=
+              #1 'namesleft := }
+            'skip$
+          if$
           namesleft #1 >
             { ", " * t * }
             {
@@ -396,6 +415,7 @@ FUNCTION {format.names}
               t "others" =
                 {
                   " " * bbl.etal *
+                  bib.name.font
                 }
                 {
                   "\&"
@@ -411,6 +431,10 @@ FUNCTION {format.names}
       namesleft #1 - 'namesleft :=
     }
   while$
+  t "others" =
+    'skip$
+    { bib.name.font }
+  if$
   } if$
 }
 FUNCTION {format.names.ed}
@@ -442,6 +466,7 @@ FUNCTION {format.names.ed}
                 {
 
                   " " * bbl.etal *
+                  bib.name.font
                 }
                 {
                   "\&"
@@ -457,6 +482,10 @@ FUNCTION {format.names.ed}
       namesleft #1 - 'namesleft :=
     }
   while$
+  t "others" =
+    'skip$
+    { bib.name.font }
+  if$
   } if$
 }
 FUNCTION {format.key}
@@ -503,6 +532,9 @@ FUNCTION {format.note}
 
 FUNCTION {format.title}
 { title
+  duplicate$ empty$ 'skip$
+    { "t" change.case$ }
+  if$
   "title" bibinfo.check
 }
 FUNCTION {format.full.names}
@@ -517,6 +549,14 @@ FUNCTION {format.full.names}
       't :=
       nameptr #1 >
         {
+          nameptr #1
+          #1 + =
+          numnames #2
+          > and
+            { "others" 't :=
+              #1 'namesleft := }
+            'skip$
+          if$
           namesleft #1 >
             { ", " * t * }
             {
@@ -637,8 +677,7 @@ FUNCTION {n.dashify}
 }
 
 FUNCTION {word.in}
-{ bbl.in capitalize
-  " " * }
+{ "" }
 
 FUNCTION {format.date}
 { year "year" bibinfo.check duplicate$ empty$
@@ -673,8 +712,7 @@ FUNCTION {format.bvolume}
       "volume" bibinfo.check * *
       series "series" bibinfo.check
       duplicate$ empty$ 'pop$
-        { swap$ bbl.of space.word * swap$
-          emphasize * }
+        { emphasize ", " * swap$ * }
       if$
       "volume and number" number either.or.check
     }
@@ -744,6 +782,7 @@ FUNCTION {format.pages}
         }
       if$
       "pages" bibinfo.check
+     "(" swap$ * ")" *
     }
   if$
 }
@@ -752,7 +791,7 @@ FUNCTION {format.journal.pages}
     { swap$ duplicate$ empty$
         { pop$ pop$ format.pages }
         {
-          ", " *
+          "; " *
           swap$
           n.dashify
           "pages" bibinfo.check
@@ -767,7 +806,7 @@ FUNCTION {format.journal.eid}
   duplicate$ empty$ 'pop$
     { swap$ duplicate$ empty$ 'skip$
       {
-          ", " *
+          "; " *
       }
       if$
       swap$ *
@@ -908,6 +947,7 @@ FUNCTION {article}
   crossref missing$
     {
       journal
+      remove.dots
       "journal" bibinfo.check
       emphasize
       "journal" output.check
@@ -1291,6 +1331,14 @@ FUNCTION {sort.format.names}
       format.name$ 't :=
       nameptr #1 >
         {
+          nameptr #1
+          #1 + =
+          numnames #2
+          > and
+            { "others" 't :=
+              #1 'namesleft := }
+            'skip$
+          if$
           "   "  *
           namesleft #1 = t "others" = and
             { "zzzzz" * }
@@ -1446,6 +1494,8 @@ FUNCTION {begin.bib}
   write$ newline$
   "\providecommand{\natexlab}[1]{#1}"
   write$ newline$
+  "\newcommand{\Capitalize}[1]{\uppercase{#1}}" write$ newline$
+  "\newcommand{\capitalize}[1]{\expandafter\Capitalize#1}" write$ newline$
 }
 EXECUTE {begin.bib}
 EXECUTE {init.state.consts}
@@ -1457,4 +1507,4 @@ FUNCTION {end.bib}
 EXECUTE {end.bib}
 %% End of customized bst file
 %%
-%% End of file `thesisnumbered.bst'.
+%% End of file `timthesisnumbered.bst'.

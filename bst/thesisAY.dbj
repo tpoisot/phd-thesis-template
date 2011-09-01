@@ -1,6 +1,6 @@
-%% Driver file to produce thesisnumbered.bst from merlin.mbs
+%% Driver file to produce thesisAY.bst from merlin.mbs
 %% Generated with makebst, version 4.1 (2003/09/08)
-%% Produced on 2011/06/05 at 1:44
+%% Produced on 2011/08/31 at 13:39
 %% 
 \input docstrip
 
@@ -75,16 +75,21 @@ End of customized bst file
 % seq-yrr,%: Reverse year ordered
 %--------------------
 %ORDERING OF REFERENCES (if author-year citations)
-%   %: (def) Alphabetical
+    %: (def) Alphabetical
 % seq-lab,%: By label
+% seq-labc,%: By label and cite order
 % seq-key,%: By label and cite key
 % seq-yr,%: Year ordered
 % seq-yrr,%: Reverse year ordered
-  seq-no,%: Citation order
+% seq-no,%: Citation order
 %--------------------
 %ORDER ON VON PART (if not citation order)
-%   %: (def) Sort on von part
+    %: (def) Sort on von part
 % vonx,%: Sort without von part
+%--------------------
+%IGNORE FIRST NAMES (if author-year citations)
+    %: (def) Respect first names
+% xintls,%: Sort on surname only
 %--------------------
 %AUTHOR NAMES:
 % ed-au,%: Full, surname last
@@ -100,8 +105,8 @@ End of customized bst file
 % nm-revv1,%: First name reversed, with full names
 %--------------------
 %EDITOR NAMES IN COLLECTIONS (if author names reversed)
-    %: (def) Editor names NOT reversed
-% ed-rev,%: Editor names reversed
+%   %: (def) Editor names NOT reversed
+  ed-rev,%: Editor names reversed
 %--------------------
 %POSITION OF JUNIOR (if author names reversed)
   jnrlst,%: Junior comes last
@@ -123,9 +128,11 @@ End of customized bst file
 % nmdash,nmd-3,%: Repeated author/editor names replaced by 3 dashes
 %--------------------
 %NUMBER OF AUTHORS IN BIBLIOGRAPHY:
-    %: (def) All authors
-% nmlm,%: Limited authors
+%   %: (def) All authors
+  nmlm,%: Limited authors
 %--------------------
+    x2,%: Maximum of 2 authors
+    m1,%: Minimum of 1 authors
 %AUTHORS IN CITATIONS:
     %: (def) One author et al
 % mcite,%: Some other truncation scheme
@@ -136,12 +143,14 @@ End of customized bst file
 % mct-3,%: One, Two, Three et al
 % mct-4,%: One, Two, Three, Four et al
 % mct-5,%: One, Two, Three, Four, Five et al
+% mct-6,%: One, Two, Three, Four, Five, Six et al
 %--------------------
 %MAX AUTHORS WITHOUT ET AL: (if regular cite not selected)
 % mct-x2,%: Two authors without truncating
 % mct-x3,%: Three authors
 % mct-x4,%: Four authors
 % mct-x5,%: Five authors
+% mct-x6,%: Six authors
 %--------------------
 %TYPEFACE FOR AUTHORS IN LIST OF REFERENCES:
     %: (def) Normal font for author names
@@ -187,8 +196,8 @@ End of customized bst file
 % blkyear,%: Missing date left blank
 %--------------------
 %DATE POSITION:
-%   %: (def) Date at end
-  dt-beg,%: Date after authors
+    %: (def) Date at end
+% dt-beg,%: Date after authors
 % dt-jnl,%: Date part of journal spec.
 % dt-end,%: Date at very end
 %--------------------
@@ -211,11 +220,11 @@ End of customized bst file
 %--------------------
 %DATE FORMAT (if author-year citations)
 %   %: (def) Year plain
-  yr-par,%: Year in parentheses
+% yr-par,%: Year in parentheses
 % yr-brk,%: Year in brackets
 % yr-col,%: Year preceded by colon
 % yr-per,%: Year preceded by period
-% yr-com,%: Date preceded by comma
+  yr-com,%: Date preceded by comma
 % yr-blk,%: Year preceded by space
 %--------------------
 %INCLUDE MONTHS:
@@ -231,10 +240,10 @@ End of customized bst file
 % yrp-col,%: Colon after date
 % yrp-semi,%: Semi-colon after date
 % yrp-per,%: Period after date
-  yrp-x,%: No punct. after date
+% yrp-x,%: No punct. after date
 %--------------------
 %BLANK AFTER DATE:
-    %: (def) Space after date
+%   %: (def) Space after date
 % yrpp-xsp,%: No space after date
 %--------------------
 %DATE FONT:
@@ -246,8 +255,8 @@ End of customized bst file
 %   %: (def) Year truncated
 %--------------------
 %TITLE OF ARTICLE:
-    %: (def) Title plain
-% tit-it,%: Title italic
+%   %: (def) Title plain
+  tit-it,%: Title italic
 % tit-qq,qt-s,%: Title and punctuation in single quotes
 % tit-qq,%: Title and punctuation in double quotes
 % tit-qq,qt-g,%: Title and punctuation in guillemets
@@ -260,8 +269,8 @@ End of customized bst file
 %   %: (def) Collection and proceedings titles not in quotes
 %--------------------
 %CAPITALIZATION OF ARTICLE TITLE:
-%   %: (def) Sentence style
-  atit-u,%: Title style
+    %: (def) Sentence style
+% atit-u,%: Title style
 %--------------------
 %ARTICLE TITLE PRESENT:
     %: (def) Article title present
@@ -272,8 +281,8 @@ End of customized bst file
 % jxper,%: Dotless journal names
 %--------------------
 %JOURNAL NAME FONT:
-    %: (def) Journal name italics
-% jttl-rm,%: Journal name normal
+%   %: (def) Journal name italics
+  jttl-rm,%: Journal name normal
 %--------------------
 %THESIS TITLE:
     %: (def) Thesis titles like books
@@ -304,10 +313,10 @@ End of customized bst file
   vnum-x,%: Journal vol, without number
 %--------------------
 %VOLUME PUNCTUATION:
-%   %: (def) Volume with colon
+    %: (def) Volume with colon
 % volp-sp,%: Volume with colon and space
 % volp-semi,%: Volume with semi-colon
-  volp-com,%: Volume with comma
+% volp-com,%: Volume with comma
 % volp-blk,%: Volume with blank
 %--------------------
 %YEAR IN JOURNAL SPECIFICATION:
@@ -348,16 +357,16 @@ End of customized bst file
 % numser,%: Just before publisher
 %--------------------
 %VOLUME AND SERIES FOR BOOKS/COLLECTIONS:
-    %: (def) Vol. 23 of Series
-% ser-vol,%: Series, vol. 23
+%   %: (def) Vol. 23 of Series
+  ser-vol,%: Series, vol. 23
 %--------------------
 %POSITION OF VOLUME AND SERIES FOR INCOLLECTIONS:
     %: (def) Series and volume after the editors
 % ser-ed,%: Series and volume after booktitle
 %--------------------
 %JOURNAL NAME PUNCTUATION:
-%   %: (def) Comma after journal
-  jnm-x,%: Space after journal
+    %: (def) Comma after journal
+% jnm-x,%: Space after journal
 %--------------------
 %BOOK TITLE:
     %: (def) Book title italic
@@ -400,6 +409,7 @@ End of customized bst file
 %--------------------
 %DOI NUMBER:
 % doi,%: Include DOI
+% url-doi,%: Format DOI as URL //dx.doi.org/doi
 % agu-doi,doi,%: Insert DOI AGU style
     %: (def) No DOI
 %--------------------
@@ -463,23 +473,23 @@ End of customized bst file
 %--------------------
 %ABBREVIATE WORD `PAGES' (if not using external language file)
 %   %: (def) `Page(s)'
-% pp,%: `Page' abbreviated
-  ppx,%: `Page' omitted
+  pp,%: `Page' abbreviated
+% ppx,%: `Page' omitted
 %--------------------
 %ABBREVIATE WORD `EDITORS':
-%   %: (def) `Editor(s)'
-  ed,%: `Editor' abbreviated
+    %: (def) `Editor(s)'
+% ed,%: `Editor' abbreviated
 %--------------------
 %OTHER ABBREVIATIONS:
-    %: (def) No abbreviations
-% abr,%: Abbreviations
+%   %: (def) No abbreviations
+  abr,%: Abbreviations
 %--------------------
 %ABBREVIATION FOR `EDITION' (if abbreviating words)
-%   %: (def) `Edition' abbreviated as `edn'
+    %: (def) `Edition' abbreviated as `edn'
 % ednx,%: `Edition' abbreviated as `ed'
 %--------------------
 %MONTHS WITH DOTS:
-%   %: (def) Months with dots
+    %: (def) Months with dots
 % mth-bare,%: Months without dots
 %--------------------
 %EDITION NUMBERS:
@@ -549,5 +559,5 @@ End of customized bst file
 % plntx,%: Use only Plain TeX
 %--------------------
   }}
-\generate{\file{thesisnumbered.bst}{\MBopts}}
+\generate{\file{thesisAY.bst}{\MBopts}}
 \endbatchfile

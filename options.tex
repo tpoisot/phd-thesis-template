@@ -1,0 +1,336 @@
+% !TEX root =  thesis-ms.tex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% REQUIRED PACKAGES !!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% My thesis has some maths in it
+\usepackage{amsmath}
+\usepackage[T1]{fontenc}
+
+%%% FOR THE NON-XETEX VERSION, UNCOMMENT ALL
+% Some basic stuff
+%\usepackage[utf8]{inputenc}
+%\usepackage[loosequotes,frenchmath,lf]{MinionPro}
+%\usepackage[scaled]{helvet}
+
+%%% FOR THE XETEX VERSION, UNCOMMENT ALL
+\usepackage[uppercase=upright,greeklowercase=upright,utopia]{mathdesign}
+\usepackage[silent]{fontspec}
+\usepackage{xltxtra}
+\usepackage{polyglossia}
+\setmainlanguage{french}
+\defaultfontfeatures{Mapping=tex-text,Language=French}
+\setromanfont[Mapping=tex-text,UprightFont=* Regular,ItalicFont=* Italic,BoldFont=* Semibold, BoldItalicFont=* Semibold Italic, SmallCapsFont=Utopia-RegularSC]{Utopia}
+\setsansfont[Scale=MatchLowercase,Mapping=tex-text]{Myriad Pro}
+\setmonofont[Scale=MatchLowercase]{Andale Mono}
+
+%% 10.5 pt font size
+\usepackage{type1cm}
+\makeatletter
+\renewcommand\normalsize{%
+   \@setfontsize\normalsize{10.5pt}{11pt}
+   \abovedisplayskip 10\p@ \@plus2\p@ \@minus5\p@
+   \abovedisplayshortskip \z@ \@plus3\p@
+   \belowdisplayshortskip 6\p@ \@plus3\p@ \@minus3\p@
+   \belowdisplayskip \abovedisplayskip
+   \let\@listi\@listI}\normalsize 
+\makeatother
+
+% Needed for various things
+\usepackage{boxedminipage}
+
+% Multiple columns
+\usepackage{multicol}
+
+% For the index
+\usepackage{imakeidx}
+\makeindex
+
+% Necessary for box coloring
+\usepackage[usenames,dvipsnames,svgnames]{xcolor}
+
+% Necessary for boxes
+\usepackage{fancybox}
+
+% Necessary for custom floats
+\usepackage{float}
+
+% Better-looking tabs
+\usepackage{booktabs}
+
+% Sideways tables and figures
+\usepackage{rotating}
+
+% Customization of captions
+\usepackage{caption}
+
+% Subfigures
+\usepackage{subfigure}
+
+% For the boxes
+\usepackage{framed}
+
+% To handle figures correctly
+\usepackage{graphicx}
+
+% Landscape pages
+\usepackage{lscape}
+
+%% Lettrines
+\usepackage{lettrine}
+
+% For some custom commands
+\usepackage{xspace}
+
+% Line spacing
+\usepackage{setspace}
+
+% Embedded PDF
+\usepackage{pdfpages}
+
+% Line numbers in the draft
+\usepackage{lineno}
+
+% For some diagrams
+\usepackage{tikz}
+
+% Needed for something, probably
+\usepackage{enumitem}
+
+% Build hyperlinks in the PDF
+\usepackage[bookmarks, colorlinks, breaklinks]{hyperref}  
+%, pagebackref
+
+% Page layout
+\usepackage[a4paper,inner=5cm,outer=2.3cm,top=4cm,bottom=4cm]{geometry}
+
+% Natbib with options
+%\usepackage[numbers,sort]{natbib}
+\usepackage[authoryear,round,sort]{natbib}
+
+% Package for spacing of references
+\usepackage{natbibspacing}
+
+% Customization of the heading appearance
+\usepackage{sectsty}
+
+% Pre-defined chapters headings
+%\usepackage[PetersLenny]{fncychap} % ou PetersLenny / Sonny ?
+
+% Head and foot of all pages
+\usepackage{fancyhdr}
+
+% To get the number of phages (I may of may have not replaced it by a custom marker ?)
+\usepackage{lastpage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% CUSTOM MODIFICATIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% My own commands for annotation
+\newcommand\refneed{{\color{red}\textsc{[ref.]}\xspace}}
+\newcommand\remq[1]{{\color{blue}\texttt{\small NOTE: #1}}}
+\newcommand\todo[1]{{\color{YellowOrange}\texttt{\small TODO: #1}}}
+
+% I like the variant of epsilon better in most fonts
+\renewcommand\epsilon{\varepsilon}
+
+% Setup of link coloring for the electronic version
+%\hypersetup{linkcolor=black,citecolor=blue,filecolor=black,urlcolor=blue}
+\hypersetup{linkcolor=black,citecolor=black,filecolor=black,urlcolor=black}
+%backref
+
+% General typographical features
+\setlength\parindent{4ex}
+\setlength\parskip{.8em}
+\linespread{1.2}
+
+% Bibliography
+\renewcommand\bibsection{\vskip -1em} % No chapter for the references list
+\renewcommand\bibfont{\footnotesize} % Small references
+
+% Declare the box type, numbered within chapters
+\DeclareCaptionType[within=chapter]{tbox}[Encadré][Liste des encadrés]
+
+% Definition of a shaded-like environment
+\newenvironment{myshaded}
+  {\def\FrameCommand{\setlength\fboxsep{0pt}\colorbox{shadecolor}}%
+    \MakeFramed {\advance\hsize-\width \FrameRestore}}%
+{\endMakeFramed}
+
+% Definition of a box environment with custom caption and list of captions
+\newenvironment{boxenv}[3]
+  {\colorlet{shadecolor}{#2}%
+    \begin{tbox}[#1]%
+    \noindent\begin{minipage}{#3}%
+      \begin{myshaded}%
+      \centering%
+      \begin{minipage}{0.9\textwidth}%
+      \vskip1em
+      \par\sffamily\small}
+  {\normalsize\par\end{minipage}\vskip 1em\end{myshaded}\end{minipage}\end{tbox}}
+
+% Command for degrees
+\newcommand{\degree}{\ensuremath{^\circ}}
+
+% Setup the format of heading levels
+\sectionfont{\large\bfseries} 
+\subsectionfont{\rmfamily\itshape\normalsize\mdseries}
+\paragraphfont{\rmfamily\bfseries}
+
+
+% Captions are setup in sans-serif, smaller, with the caption in boldface
+\captionsetup{font={small,sf,stretch=0.9},labelfont={sf,bf}}
+
+% Bibliography items are less spaced than the default, useful for many references
+\setlength{\bibspacing}{0.5em}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% THAT'S ALL, FOLKS !!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% WHAT IS BELOW IS EXPERIMENTAL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand\tchapter[3]{%
+\cleardoublepage\thispagestyle{empty}
+\addtocounter{chapter}{1}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #2}{}}
+\addcontentsline{toc}{chapter}{#2}
+\begin{flushright}
+\vskip 5em
+{\noindent\sffamily\huge\bfseries Chapitre~\thechapter}
+\vskip 1em
+\rule{\paperwidth}{.3em}
+\vskip 5em
+\begin{minipage}{0.8\textwidth}
+	\begin{flushright}
+	{\noindent\sffamily\LARGE #1}
+	\end{flushright}
+\end{minipage}
+\vfill
+\begin{minipage}{0.8\textwidth}
+	\begin{flushright}
+	{\noindent\normalsize #3}
+	\end{flushright}
+\end{minipage}
+\vfill
+\end{flushright}
+\cleardoublepage
+}
+
+
+%%% Change chapter style
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{20\p@}%
+  {\parindent \z@ \centering
+    \normalfont
+    \begin{flushright}
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        {\noindent\sffamily\huge\bfseries \@chapapp\space~\thechapter}
+        \par\nobreak
+      \fi
+    \fi
+    \vskip 1em
+	\rule{\paperwidth}{.3em}
+	\vskip 5em
+    \interlinepenalty\@M
+	    \begin{minipage}{0.8\textwidth}
+			\begin{flushright}
+				{\noindent\sffamily\LARGE #1}
+			\end{flushright}
+		\end{minipage}
+	\vskip 10em
+    \end{flushright}
+  }}
+\def\@schapter#1{\if@twocolumn
+                   \@topnewpage[\@makeschapterhead{#1}]%
+                 \else
+                   \@makeschapterhead{#1}%
+                   \@afterheading
+                 \fi}
+\def\@makeschapterhead#1{%
+  \vspace*{20\p@}%
+  {\parindent \z@ \centering
+    \normalfont
+    \begin{flushright}
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        {\phantom\noindent\sffamily\huge\bfseries \@chapapp\space~\thechapter}
+        \par\nobreak
+      \fi
+    \fi
+    \vskip 1em
+	\rule{\paperwidth}{.3em}
+	\vskip 5em
+    \interlinepenalty\@M
+	    \begin{minipage}{0.8\textwidth}
+			\begin{flushright}
+				{\noindent\sffamily\LARGE #1}
+			\end{flushright}
+		\end{minipage}
+	\vskip 10em
+    \end{flushright}
+  }}
+\makeatother  
+  
+%% To include the reference of a paper
+\newcommand\PaperRef[1]{%
+\begin{flushright}%
+\vfill
+\begin{minipage}{0.8\textwidth}
+	\begin{flushright}
+	{\noindent\normalsize #1}
+	\end{flushright}
+\end{minipage}
+\vfill
+\end{flushright}
+\newpage
+}
+
+%% No paper included
+\newcommand\NoPaper{%
+\newpage
+}
+
+% Change Layout of Backref
+%\renewcommand*{\backref}[1]{%
+	% default interface
+	% #1: backref list
+	%
+	% We want to use the alternative interface,
+	% therefore the definition is empty here.
+%}%
+%\renewcommand*{\backrefalt}[4]{%
+	% alternative interface
+	% #1: number of distinct back references
+	% #2: backref list with distinct entries
+	% #3: number of back references including duplicates
+	% #4: backref list including duplicates
+%	\mbox{[%
+%	\ifnum#1=1 %
+%		p.~%
+%	\else
+%		pp.~%
+%	\fi
+%	#2]}%
+%}
+
+%\renewcommand*{\backreftwosep}{~\&~}
+%\renewcommand*{\backreflastsep}{~\&~}
+
+%% Raised date
+\newcommand{\expo}[1]{\raisebox{1ex}{{\tiny#1}}\xspace}
