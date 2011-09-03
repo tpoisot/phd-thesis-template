@@ -44,17 +44,9 @@
 \renewcommand{\footrulewidth}{0pt}
 %% end headings
 \reversemarginpar
-\include{chapters/intro}
+\include{chapters/example}
 
-\include{chapters/review}
-\include{chapters/pdi}
-
-\include{chapters/biolett}
-\include{chapters/modelcoevo}
-
-\include{chapters/coexwebs}
-
-\include{chapters/conclusions}\cleardoublepage
+%\include{chapters/conclusions}\cleardoublepage
 \appendix\pagestyle{plain}
 
 %% Bibliography
@@ -63,7 +55,7 @@
 \begin{flushleft}
 {\linespread 1%
 \bibliographystyle{bst/thesisAY}
-\bibliography{/Users/tpoisot/Dropbox/library}%
+\bibliography{bibtex-file}%
 }
 \end{flushleft}
 \end{multicols}
@@ -73,9 +65,7 @@
 \setlength\parskip{1em}
 
 %% Supplementary chapters
-\input{annex/glossaire.tex}
-\input{annex/papers.tex}
-\input{annex/listofpublis.tex}
+%\input{annex/glossaire.tex}
 
 %\addtocounter{chapter}{1}
 %\addcontentsline{toc}{chapter}{Index} 
